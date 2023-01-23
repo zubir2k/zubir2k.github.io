@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Zubir Tech</h1>
+<p>This is a temporary GitHub Pages.</p>
+</body>
+</html>
