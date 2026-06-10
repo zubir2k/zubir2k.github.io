@@ -586,10 +586,12 @@
   </section>
 
   <footer>
-    <p>© 2025 Muhammad Zubir Jamalullail · <a href="https://zubir.is-a.dev" style="color:inherit; text-decoration:none;">zubir.is-a.dev</a></p>
+    <p>© <span id="year"></span> Muhammad Zubir Jamalullail · <a href="https://zubir.is-a.dev" style="color:inherit; text-decoration:none;">zubir.is-a.dev</a> <script type="text/javascript" src="https://widgets.amung.us/small.js"></script><script type="text/javascript">WAU_small('4gvyv8qq1zeh')</script></p>
   </footer>
 
   <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
     // Scroll reveal
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
