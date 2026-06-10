@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Muhammad Zubir Jamalullail — VP Digital Payments & Transit Innovation</title>
+  <meta name="description" content="Fintech strategist with 20+ years shaping Malaysia's payments ecosystem. VP Open Payment System at Prasarana." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:      #0F1B2D;
+      --navy-mid:  #162236;
+      --navy-soft: #1E3050;
+      --gold:      #F5A623;
+      --gold-dim:  #C4841B;
+      --white:     #F8F9FC;
+      --muted:     #8A9BB5;
+      --text:      #D4DCEA;
+      --rail:      rgba(245,166,35,0.35);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(15,27,45,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(245,166,35,0.12);
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+      height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-brand {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 1rem;
+      color: var(--white); letter-spacing: 0.02em;
+    }
+    .nav-brand span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none;
+      font-size: 0.82rem; font-weight: 500; letter-spacing: 0.06em;
+      text-transform: uppercase; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── SECTIONS ── */
+    section { padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 4rem); }
+    .container { max-width: 900px; margin: 0 auto; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      background:
+        radial-gradient(ellipse 60% 50% at 80% 40%, rgba(245,166,35,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 10% 80%, rgba(30,48,80,0.6) 0%, transparent 60%),
+        var(--navy);
+      position: relative; overflow: hidden;
+    }
+    .hero-track {
+      position: absolute; left: clamp(1.5rem, 5vw, 4rem);
+      top: 0; bottom: 0; width: 2px;
+      background: linear-gradient(to bottom, transparent 0%, var(--gold) 30%, var(--gold) 70%, transparent 100%);
+      opacity: 0.25;
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 1.4rem;
+    }
+    .hero-eyebrow::before {
+      content: ''; width: 28px; height: 2px; background: var(--gold);
+    }
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 800; line-height: 1.08;
+      color: var(--white); letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    h1 em {
+      font-style: normal; color: var(--gold);
+      display: block;
+    }
+    .hero-sub {
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      color: var(--muted); max-width: 540px;
+      margin-bottom: 2.4rem; font-weight: 300;
+    }
+    .hero-links {
+      display: flex; flex-wrap: wrap; gap: 0.75rem;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.65rem 1.4rem; border-radius: 4px;
+      font-size: 0.82rem; font-weight: 600;
+      letter-spacing: 0.04em; text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: var(--gold); color: var(--navy);
+    }
+    .btn-primary:hover { background: #e0951f; transform: translateY(-1px); }
+    .btn-outline {
+      border: 1px solid rgba(245,166,35,0.4); color: var(--gold);
+    }
+    .btn-outline:hover {
+      border-color: var(--gold); background: rgba(245,166,35,0.08);
+      transform: translateY(-1px);
+    }
+
+    /* ── HIGHLIGHTS ── */
+    #highlights { background: var(--navy-mid); }
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1px; background: rgba(245,166,35,0.1);
+      border: 1px solid rgba(245,166,35,0.1); border-radius: 8px; overflow: hidden;
+    }
+    .highlight-card {
+      background: var(--navy-mid);
+      padding: 1.8rem 1.6rem;
+      transition: background 0.2s;
+    }
+    .highlight-card:hover { background: var(--navy-soft); }
+    .highlight-year {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.1em; color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+    .highlight-text {
+      font-size: 0.88rem; color: var(--text); line-height: 1.5;
+    }
+
+    /* ── SECTION HEADERS ── */
+    .section-label {
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.5rem;
+    }
+    h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 800; color: var(--white);
+      letter-spacing: -0.01em; margin-bottom: 2.5rem;
+    }
+
+    /* ── TIMELINE (RAIL) ── */
+    #experience { background: var(--navy); }
+    .rail-container { position: relative; padding-left: 2.5rem; }
+    .rail-line {
+      position: absolute; left: 6px; top: 6px; bottom: 6px;
+      width: 2px; background: linear-gradient(to bottom, var(--gold), rgba(245,166,35,0.1));
+    }
+    .rail-stop {
+      position: relative; margin-bottom: 3rem;
+    }
+    .rail-stop::before {
+      content: '';
+      position: absolute; left: -2.5rem; top: 6px;
+      width: 14px; height: 14px; border-radius: 50%;
+      background: var(--navy); border: 2px solid var(--gold);
+      transition: background 0.2s;
+    }
+    .rail-stop:hover::before { background: var(--gold); }
+    .stop-meta {
+      display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: baseline;
+      margin-bottom: 0.3rem;
+    }
+    .stop-company {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem; font-weight: 700; color: var(--white);
+    }
+    .stop-period {
+      font-size: 0.75rem; color: var(--gold); font-weight: 600;
+      letter-spacing: 0.06em;
+    }
+    .stop-role {
+      font-size: 0.88rem; color: var(--muted);
+      margin-bottom: 0.8rem; font-style: italic;
+    }
+    .stop-bullets { list-style: none; }
+    .stop-bullets li {
+      position: relative; padding-left: 1.1rem;
+      font-size: 0.88rem; color: var(--text);
+      margin-bottom: 0.4rem; line-height: 1.55;
+    }
+    .stop-bullets li::before {
+      content: '—'; position: absolute; left: 0;
+      color: var(--gold-dim); font-size: 0.75rem;
+    }
+    .earlier-box {
+      border: 1px solid rgba(245,166,35,0.15);
+      border-radius: 6px; padding: 1.2rem 1.4rem;
+      background: rgba(30,48,80,0.3);
+    }
+    .earlier-box p { font-size: 0.88rem; color: var(--muted); }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--navy-mid); }
+    .skills-groups {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+    }
+    .skill-group-label {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 0.9rem;
+    }
+    .skill-pills { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .pill {
+      padding: 0.3rem 0.75rem; border-radius: 20px;
+      font-size: 0.78rem; font-weight: 500;
+      background: rgba(245,166,35,0.08);
+      border: 1px solid rgba(245,166,35,0.2);
+      color: var(--text); transition: all 0.15s;
+    }
+    .pill:hover {
+      background: rgba(245,166,35,0.15);
+      border-color: rgba(245,166,35,0.45);
+      color: var(--white);
+    }
+
+    /* ── CERTIFICATIONS ── */
+    #credentials { background: var(--navy); }
+    .cred-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    .cred-card {
+      border: 1px solid rgba(245,166,35,0.12);
+      border-radius: 6px; padding: 1.1rem 1.3rem;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .cred-card:hover {
+      border-color: rgba(245,166,35,0.4);
+      background: rgba(30,48,80,0.4);
+    }
+    .cred-title {
+      font-size: 0.88rem; font-weight: 600; color: var(--white);
+      margin-bottom: 0.25rem;
+    }
+    .cred-issuer {
+      font-size: 0.78rem; color: var(--muted);
+    }
+    .cred-year {
+      font-size: 0.72rem; color: var(--gold); font-weight: 600;
+      margin-top: 0.4rem; letter-spacing: 0.06em;
+    }
+
+    /* ── COMMUNITY ── */
+    #community { background: var(--navy-mid); }
+    .community-card {
+      border-left: 3px solid var(--gold);
+      padding: 1.2rem 1.5rem;
+      background: rgba(245,166,35,0.04);
+      border-radius: 0 6px 6px 0;
+      max-width: 680px;
+    }
+    .community-card p { font-size: 0.95rem; color: var(--text); line-height: 1.7; }
+    .community-card a { color: var(--gold); text-decoration: none; }
+    .community-card a:hover { text-decoration: underline; }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--navy); text-align: center; }
+    #contact h2 { margin-bottom: 0.5rem; }
+    #contact p { color: var(--muted); margin-bottom: 2rem; }
+    .contact-links {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;
+    }
+    .contact-item {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.88rem; color: var(--text);
+      text-decoration: none; padding: 0.6rem 1.1rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 4px; transition: all 0.2s;
+    }
+    .contact-item:hover {
+      color: var(--gold); border-color: rgba(245,166,35,0.4);
+      background: rgba(245,166,35,0.05);
+    }
+    .contact-item svg { flex-shrink: 0; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center; padding: 1.5rem;
+      font-size: 0.75rem; color: rgba(138,155,181,0.5);
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0; transform: translateY(22px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .rail-container { padding-left: 1.8rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { transition: none; opacity: 1; transform: none; }
+      .btn:hover, .pill:hover, .cred-card:hover { transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-brand">Zubir<span>.</span></div>
+    <ul class="nav-links">
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#credentials">Credentials</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section id="hero">
+    <div class="hero-track"></div>
+    <div class="container hero-content">
+      <div class="hero-eyebrow">Kuala Lumpur, Malaysia</div>
+      <h1>
+        Muhammad Zubir
+        <em>Jamalullail</em>
+      </h1>
+      <p class="hero-sub">
+        Fintech strategist with 20+ years shaping Malaysia's payments ecosystem — from pioneering JomPAY's Shariah-compliant framework to leading Open Payment Systems for Malaysia's largest urban transit network.
+      </p>
+      <div class="hero-links">
+        <a href="mailto:zubirjamal@gmail.com" class="btn btn-primary">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Get in Touch
+        </a>
+        <a href="https://linkedin.com/in/zubirjamal" target="_blank" rel="noopener" class="btn btn-outline">LinkedIn</a>
+        <a href="https://github.com/zubir2k" target="_blank" rel="noopener" class="btn btn-outline">GitHub</a>
+        <a href="https://zubir.tech" target="_blank" rel="noopener" class="btn btn-outline">Blog</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CAREER HIGHLIGHTS ── -->
+  <section id="highlights">
+    <div class="container reveal">
+      <div class="section-label">Career Highlights</div>
+      <h2>Milestones at a Glance</h2>
+      <div class="highlights-grid">
+        <div class="highlight-card">
+          <div class="highlight-year">2025</div>
+          <div class="highlight-text">Led MyDigital ID (SSO) integration for Prasarana's online platforms</div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-year">2025</div>
+          <div class="highlight-text">Appointed VP to lead Open Payment System for Rapid Rail & Rapid Bus</div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-year">2022</div>
+          <div class="highlight-text">Automated BNM staff compliance — asset declarations & code of conduct attestation</div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-year">2020</div>
+          <div class="highlight-text">Led CIB upgrade for Bank Rakyat's Core Banking (CoBRa) migration</div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-year">2018</div>
+          <div class="highlight-text">Pioneered Malaysia's first app-based MFA for corporate banking, endorsed by BNM</div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-year">2017</div>
+          <div class="highlight-text">Launched i-bizRAKYAT — migrated 1,414 cooperatives, 4× adoption in Year 1</div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-year">2014</div>
+          <div class="highlight-text">Spearheaded JomPAY (NBPS), set Shariah-compliant biller code benchmark for Islamic banks</div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-year">2008</div>
+          <div class="highlight-text">Implemented cheque outsourcing for Malaysia's largest Takaful operator (50,000 cheques)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── EXPERIENCE ── -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-label reveal">Experience</div>
+      <h2 class="reveal">Professional Journey</h2>
+
+      <div class="rail-container">
+        <div class="rail-line"></div>
+
+        <div class="rail-stop reveal">
+          <div class="stop-meta">
+            <span class="stop-company">Prasarana Malaysia Berhad</span>
+            <span class="stop-period">Sep 2025 – Present</span>
+          </div>
+          <div class="stop-role">Vice President, Open Payment System · Group Digital</div>
+          <ul class="stop-bullets">
+            <li>Leading strategic development of the Open Payment System (OPS) for Malaysia's largest urban transit operator, encompassing programme governance, cross-functional alignment, and national-level stakeholder engagement.</li>
+            <li>Driving MyDigital ID (SSO) integration in support of Malaysia's national digital agenda, leading end-to-end requirements definition and strategic partnership.</li>
+          </ul>
+        </div>
+
+        <div class="rail-stop reveal">
+          <div class="stop-meta">
+            <span class="stop-company">Bank Negara Malaysia</span>
+            <span class="stop-period">Sep 2022 – Aug 2025</span>
+          </div>
+          <div class="stop-role">Manager / Business Analyst · Business Technology Department</div>
+          <ul class="stop-bullets">
+            <li>Led end-to-end transformation of Code of Conduct attestation and asset declaration processes, replacing manual workflows with an automated system featuring real-time analytics for bank-wide compliance monitoring.</li>
+            <li>Contributed to ISO 20022 readiness (MT/MX financial messaging standardization) via systems impact assessment and stakeholder consultation.</li>
+            <li>Served as Technology Partner to the Development Sector — Islamic Finance, Financial Inclusion, Financial Development & Innovation — translating sectoral goals into actionable IT initiatives.</li>
+          </ul>
+        </div>
+
+        <div class="rail-stop reveal">
+          <div class="stop-meta">
+            <span class="stop-company">Bank Kerjasama Rakyat Malaysia</span>
+            <span class="stop-period">Jan 2015 – Aug 2022</span>
+          </div>
+          <div class="stop-role">Assistant Manager · Cash Management & Digital Business</div>
+          <ul class="stop-bullets">
+            <li>Spearheaded end-to-end development and rollout of i-bizRAKYAT (Corporate Internet Banking), migrating 1,414 clients and achieving 4× acquisition growth in Year 1.</li>
+            <li>Pioneered Malaysia's first app-based MFA for corporate banking, endorsed by Bank Negara Malaysia as an industry benchmark for secure digital approvals.</li>
+            <li>Led RFP, URS, test scripting, and deployment across FPX, DuitNow, JomPAY, credit, treasury, and financing modules with PayNet and vendor teams.</li>
+            <li>Delivered training across all 148 branches nationwide and established operational frameworks and SOPs for post-launch CIB operations.</li>
+          </ul>
+        </div>
+
+        <div class="rail-stop reveal">
+          <div class="stop-meta">
+            <span class="stop-company">Bank Islam Malaysia Berhad</span>
+            <span class="stop-period">Nov 2013 – Dec 2014</span>
+          </div>
+          <div class="stop-role">Cash Management & eChannels · Product Development</div>
+          <ul class="stop-bullets">
+            <li>Led business operations and implementation for the National Bill Payment Scheme (NBPS / JomPAY) across retail and corporate internet banking.</li>
+            <li>Partnered with PayNet to standardize biller codes using MSIC, creating a Shariah-compliant classification framework adopted nationwide by Islamic banks.</li>
+          </ul>
+        </div>
+
+        <div class="rail-stop reveal">
+          <div class="earlier-box">
+            <div class="stop-company" style="margin-bottom:0.6rem;">Earlier Career · 2005–2013</div>
+            <p>Held progressively impactful roles at <strong>Al Rajhi Banking & Investment Corporation</strong> (Product Manager, Cash Management) and <strong>Malayan Banking Berhad / Maybank</strong> (Maybank2e Product Implementation Officer). Key achievements: cheque outsourcing for Malaysia's largest Takaful operator (50,000 cheques), rolling out RENTAS and GIRO modules, and implementing Cash Management solutions for Tenaga Nasional Berhad, Genting Highlands, and McDonald's Malaysia.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SKILLS ── -->
+  <section id="skills">
+    <div class="container reveal">
+      <div class="section-label">Core Competencies</div>
+      <h2>Skills & Expertise</h2>
+      <div class="skills-groups">
+        <div>
+          <div class="skill-group-label">Payments & Fintech</div>
+          <div class="skill-pills">
+            <span class="pill">Open Payment Systems</span>
+            <span class="pill">JomPAY / NBPS</span>
+            <span class="pill">DuitNow</span>
+            <span class="pill">FPX</span>
+            <span class="pill">Open Banking</span>
+            <span class="pill">Cash Management</span>
+            <span class="pill">ISO 20022</span>
+            <span class="pill">Islamic Finance</span>
+          </div>
+        </div>
+        <div>
+          <div class="skill-group-label">Product & Technology</div>
+          <div class="skill-pills">
+            <span class="pill">Product Management</span>
+            <span class="pill">Digital Transformation</span>
+            <span class="pill">Corporate Internet Banking</span>
+            <span class="pill">MFA / SSO</span>
+            <span class="pill">API Integration</span>
+            <span class="pill">SDLC</span>
+          </div>
+        </div>
+        <div>
+          <div class="skill-group-label">Delivery & Governance</div>
+          <div class="skill-pills">
+            <span class="pill">Agile / Scrum</span>
+            <span class="pill">Project Management</span>
+            <span class="pill">Stakeholder Management</span>
+            <span class="pill">Regulatory Compliance</span>
+            <span class="pill">Fintech Strategy</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CREDENTIALS ── -->
+  <section id="credentials">
+    <div class="container reveal">
+      <div class="section-label">Education & Development</div>
+      <h2>Credentials</h2>
+      <div class="cred-grid">
+        <div class="cred-card">
+          <div class="cred-title">Diploma in Information Technology</div>
+          <div class="cred-issuer">Politeknik Ungku Omar, Ipoh</div>
+          <div class="cred-year">2001 – 2004</div>
+        </div>
+        <div class="cred-card">
+          <div class="cred-title">Professional Scrum Product Owner I (PSPO-I)</div>
+          <div class="cred-issuer">Scrum.org</div>
+          <div class="cred-year">Jun 2023</div>
+        </div>
+        <div class="cred-card">
+          <div class="cred-title">Google Gemini Certified Educator</div>
+          <div class="cred-issuer">Google</div>
+          <div class="cred-year">Sep 2025</div>
+        </div>
+        <div class="cred-card">
+          <div class="cred-title">Generative AI for Educators with Gemini</div>
+          <div class="cred-issuer">Google Gemini</div>
+          <div class="cred-year">Sep 2025</div>
+        </div>
+        <div class="cred-card">
+          <div class="cred-title">Microsoft Power BI (Basic)</div>
+          <div class="cred-issuer">Microsoft</div>
+          <div class="cred-year">May 2025</div>
+        </div>
+        <div class="cred-card">
+          <div class="cred-title">Fundamentals of Cloud Computing</div>
+          <div class="cred-issuer">Professional Development</div>
+          <div class="cred-year">Dec 2022</div>
+        </div>
+        <div class="cred-card">
+          <div class="cred-title">Design Thinking</div>
+          <div class="cred-issuer">Professional Development</div>
+          <div class="cred-year">Jun 2023</div>
+        </div>
+        <div class="cred-card">
+          <div class="cred-title">AWS Builder Online Training</div>
+          <div class="cred-issuer">Amazon Web Services</div>
+          <div class="cred-year">Jan 2021</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── COMMUNITY ── -->
+  <section id="community">
+    <div class="container reveal">
+      <div class="section-label">Community & Open Source</div>
+      <h2>Beyond the Day Job</h2>
+      <div class="community-card">
+        <p>
+          Co-founder of the <strong>Home Assistant Malaysia</strong> community — now 3,800+ members and the largest Malaysian smart home community. I develop and maintain open-source Home Assistant integrations on <a href="https://github.com/zubir2k" target="_blank" rel="noopener">GitHub</a>, and was appointed <strong>Language Leader</strong> for Project Assist, supporting Malay-language voice assistant development in the Home Assistant ecosystem. I also write about smart home tech and automation on my blog at <a href="https://zubir.tech" target="_blank" rel="noopener">zubir.tech</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section id="contact">
+    <div class="container reveal">
+      <div class="section-label">Let's Connect</div>
+      <h2>Get in Touch</h2>
+      <p>Open to Product Manager and Project Manager opportunities in Malaysia.</p>
+      <div class="contact-links">
+        <a href="mailto:zubirjamal@gmail.com" class="contact-item">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          zubirjamal@gmail.com
+        </a>
+        <a href="tel:+60182078050" class="contact-item">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.08 6.08l.95-.95a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          +6018-207 8050
+        </a>
+        <a href="https://linkedin.com/in/zubirjamal" target="_blank" rel="noopener" class="contact-item">
+          <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          linkedin.com/in/zubirjamal
+        </a>
+        <a href="https://github.com/zubir2k" target="_blank" rel="noopener" class="contact-item">
+          <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          github.com/zubir2k
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Muhammad Zubir Jamalullail · <a href="https://zubir.is-a.dev" style="color:inherit; text-decoration:none;">zubir.is-a.dev</a></p>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
