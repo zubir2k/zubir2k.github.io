@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -591,6 +592,14 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Path redirects
+    const paths = {
+      '/github': 'https://github.com/zubir2k',
+      '/tech': 'https://zubir.tech'
+    };
+    const current = window.location.pathname;
+    if (paths[current]) window.location.replace(paths[current]);
 
     // Scroll reveal
     const observer = new IntersectionObserver((entries) => {
