@@ -330,7 +330,7 @@
   <nav>
     <div class="nav-brand">Zubir<span>.</span></div>
     <ul class="nav-links">
-      <li><a href="/">Home</a></li>
+	  <li><a href="/">Home</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#credentials">Credentials</a></li>
@@ -568,7 +568,7 @@
     <div class="container reveal">
       <div class="section-label">Let's Connect</div>
       <h2>Get in Touch</h2>
-      <p>Open to Product Manager and Project Manager opportunities in Malaysia.</p>
+      <p>Open to conversations about digital payments, product leadership, and digital transformation roles.</p>
       <div class="contact-links">
         <a href="mailto:myname.is@zubirjamal.com" class="contact-item">
           <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -587,19 +587,11 @@
   </section>
 
   <footer>
-    <p>© <span id="year"></span> Muhammad Zubir Jamalullail · <a href="https://zubir.is-a.dev" style="color:inherit; text-decoration:none;">zubir.is-a.dev</a> <script type="text/javascript" src="https://widgets.amung.us/small.js"></script><script type="text/javascript">WAU_small('4gvyv8qq1zeh')</script></p>
+    <p>© <span id="year"></span> Muhammad Zubir Jamalullail · <a href="https://zubir.is-a.dev" style="color:inherit; text-decoration:none;">zubir.is-a.dev</a> <script type="text/javascript" src="https://widgets.amung.us/small.js"></script><script type="text/javascript">WAU_small('4gvyv8qq1zeh')</script></p></p>
   </footer>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Path redirects
-    const paths = {
-      '/github': 'https://github.com/zubir2k',
-      '/tech': 'https://zubir.tech'
-    };
-    const current = window.location.pathname;
-    if (paths[current]) window.location.replace(paths[current]);
 
     // Scroll reveal
     const observer = new IntersectionObserver((entries) => {
