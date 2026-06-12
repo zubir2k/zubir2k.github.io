@@ -23,7 +23,7 @@
       --rail:      rgba(245,166,35,0.35);
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
 
     body {
       background: var(--navy);
@@ -32,6 +32,8 @@
       font-size: 15px;
       line-height: 1.65;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      max-width: 100vw;
     }
 
     /* ── NAV ── */
@@ -317,6 +319,7 @@
     @media (max-width: 600px) {
       .nav-links { display: none; }
       .rail-container { padding-left: 1.8rem; }
+      h1 { font-size: clamp(2rem, 11vw, 3.2rem); }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -587,7 +590,7 @@
   </section>
 
   <footer>
-    <p>© <span id="year"></span> Muhammad Zubir Jamalullail · <a href="https://zubir.is-a.dev" style="color:inherit; text-decoration:none;">zubir.is-a.dev</a> <script type="text/javascript" src="https://widgets.amung.us/small.js"></script><script type="text/javascript">WAU_small('4gvyv8qq1zeh')</script></p></p>
+    <p>© <span id="year"></span> Muhammad Zubir Jamalullail · <a href="https://zubir.is-a.dev" style="color:inherit; text-decoration:none;">zubir.is-a.dev</a> <script type="text/javascript" src="https://widgets.amung.us/small.js"></script><script type="text/javascript">WAU_small('4gvyv8qq1zeh')</script></p>
   </footer>
 
   <script>
@@ -602,5 +605,9 @@
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   </script>
+
+  <!-- Cloudflare Web Analytics -->
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "9fd7c680163841fcaf52c50d9ea28b64"}'></script>
+  <!-- End Cloudflare Web Analytics -->
 </body>
 </html>
