@@ -21,18 +21,25 @@
   </style>
   <script>
     (function () {
-      var paths = {
+      // Prefixes that forward to an external base, preserving any sub-path
+      var prefixes = {
         '/github': 'https://github.com/zubir2k',
         '/tech':   'https://zubir.tech'
       };
       var p = window.location.pathname.replace(/\/+$/, '') || '/';
-      if (paths[p]) {
-        window.location.replace(paths[p]);
-      } else if (p !== '/' && p !== '/index.html') {
+      for (var prefix in prefixes) {
+        if (p === prefix || p.indexOf(prefix + '/') === 0) {
+          var rest = p.slice(prefix.length); // '', or '/repo-name', or '/repo-name/sub'
+          window.location.replace(prefixes[prefix] + rest + window.location.search);
+          return;
+        }
+      }
+      if (p !== '/' && p !== '/index.html') {
         window.location.replace('/');
       }
     })();
   </script>
+  <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "9fd7c680163841fcaf52c50d9ea28b64"}'></script><!-- End Cloudflare Web Analytics -->
 </head>
 <body>
   <noscript>
