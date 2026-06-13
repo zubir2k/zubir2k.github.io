@@ -14,6 +14,7 @@
   <style>
     /* ═══════════════════════════════════════════
        CSS RESET & DESIGN TOKENS
+       Palette: Navy + Gold  (matching zubir.is-a.dev)
        ═══════════════════════════════════════════ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -176,31 +177,6 @@
       text-transform: uppercase; opacity: 0;
     }
     .hero-sub strong { color: var(--gold); font-weight: 600; }
-
-    /* Hero CTA Buttons */
-    .hero-links {
-      display: flex; flex-wrap: wrap; gap: 0.75rem;
-      justify-content: center;
-      margin-top: 2rem; opacity: 0;
-    }
-    .btn {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      padding: 0.65rem 1.4rem; border-radius: 4px;
-      font-size: 0.82rem; font-weight: 600;
-      letter-spacing: 0.04em; text-decoration: none;
-      transition: all 0.2s;
-    }
-    .btn-primary {
-      background: var(--gold); color: var(--navy);
-    }
-    .btn-primary:hover { background: #e0951f; transform: translateY(-1px); }
-    .btn-outline {
-      border: 1px solid rgba(245,166,35,0.4); color: var(--gold);
-    }
-    .btn-outline:hover {
-      border-color: var(--gold); background: rgba(245,166,35,0.08);
-      transform: translateY(-1px);
-    }
 
     .scroll-indicator {
       position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
@@ -406,6 +382,28 @@
     .blog-readmore a:hover::after { width: 100%; }
 
     /* ═══════════════════════════════════════════
+       CONTACT SECTION
+       ═══════════════════════════════════════════ */
+    #contact { background: var(--navy); text-align: center; }
+    #contact .section-title { margin-bottom: 0.5rem; }
+    #contact p { color: var(--muted); margin-bottom: 2rem; }
+    .contact-links {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;
+    }
+    .contact-item {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.88rem; color: var(--text);
+      text-decoration: none; padding: 0.6rem 1.1rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 4px; transition: all 0.2s;
+    }
+    .contact-item:hover {
+      color: var(--gold); border-color: rgba(245,166,35,0.4);
+      background: rgba(245,166,35,0.05);
+    }
+    .contact-item svg { flex-shrink: 0; }
+
+    /* ═══════════════════════════════════════════
        FOOTER
        ═══════════════════════════════════════════ */
     footer {
@@ -456,6 +454,7 @@
       <li><a href="#projects">Projects</a></li>
       <li><a href="#web">Web</a></li>
       <li><a href="#blog">Blog</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="hamburger" id="hamburger" aria-label="Menu toggle">
       <span></span><span></span><span></span>
@@ -468,6 +467,7 @@
     <a href="#projects" class="mobile-link">Projects</a>
     <a href="#web" class="mobile-link">Web</a>
     <a href="#blog" class="mobile-link">Blog</a>
+    <a href="#contact" class="mobile-link">Contact</a>
   </div>
 
   <!-- ═══════════════════════════════════════════
@@ -481,14 +481,6 @@
       <h1 class="hero-name" id="hero-name">Zubir Jamal</h1>
       <p class="hero-tagline" id="hero-tagline">Business Technology &amp; Transformation</p>
       <p class="hero-sub" id="hero-sub">Fintech <strong>&middot;</strong> Governance <strong>&middot;</strong> Smart Home Enthusiast</p>
-      <div class="hero-links" id="hero-links">
-        <a href="mailto:myname.is@zubirjamal.com" class="btn btn-primary">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          Get in Touch
-        </a>
-        <a href="https://linkedin.com/in/zubirjamal" target="_blank" rel="noopener" class="btn btn-outline">LinkedIn</a>
-        <a href="https://github.com/zubir2k" target="_blank" rel="noopener" class="btn btn-outline">GitHub</a>
-      </div>
     </div>
     <div class="scroll-indicator" id="scroll-indicator">
       <span>Scroll</span>
@@ -587,8 +579,15 @@
       <div class="web-list">
         <a href="https://zubir.tech" target="_blank" rel="noopener" class="web-item reveal-up">
           <div class="web-item-left">
-            <div class="web-item-name">zubir.tech</div>
+            <div class="web-item-name">Zubir.Tech</div>
             <div class="web-item-desc">Tech blog on Home Assistant &amp; smart home automation in Malaysia</div>
+          </div>
+          <div class="web-item-arrow">&rarr;</div>
+        </a>
+        <a href="https://www.youtube.com/@zubirjamal" target="_blank" rel="noopener" class="web-item reveal-up">
+          <div class="web-item-left">
+            <div class="web-item-name">Youtube</div>
+            <div class="web-item-desc">Channel focused on Home Assistant and DIY smart home automation for Malaysian by Malaysians</div>
           </div>
           <div class="web-item-arrow">&rarr;</div>
         </a>
@@ -635,6 +634,31 @@
       </div>
       <div class="blog-readmore reveal-up">
         <a href="https://zubir.tech" target="_blank" rel="noopener">Read more at zubir.tech &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       CONTACT
+       ═══════════════════════════════════════════ -->
+  <section id="contact">
+    <div class="container reveal-up">
+      <div class="section-label">Get in Touch</div>
+      <h2 class="section-title">Let's Connect</h2>
+      <p>Open to conversations about Digital Payments, IoT, and smart homes.</p>
+      <div class="contact-links">
+        <a href="mailto:myname.is@zubirjamal.com" class="contact-item">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          myname.is@zubirjamal.com
+        </a>
+        <a href="https://linkedin.com/in/zubirjamal" target="_blank" rel="noopener" class="contact-item">
+          <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          linkedin.com/in/zubirjamal
+        </a>
+        <a href="https://github.com/zubir2k" target="_blank" rel="noopener" class="contact-item">
+          <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          github.com/zubir2k
+        </a>
       </div>
     </div>
   </section>
@@ -795,7 +819,6 @@
       .to('#hero-eyebrow',     { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', startAt: { y: 15 } }, '-=0.3')
       .to('#hero-tagline',     { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', startAt: { y: 15 } }, '-=0.4')
       .to('#hero-sub',         { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', startAt: { y: 15 } }, '-=0.4')
-      .to('#hero-links',       { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', startAt: { y: 15 } }, '-=0.3')
       .to('#scroll-indicator', { opacity: 1, duration: 1, ease: 'power2.out' }, '-=0.2');
   })();
 
