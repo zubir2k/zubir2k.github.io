@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Home Assistant Card Demos — Zubir Jamal</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        max-width: 820px;
+        margin: 2.5rem auto;
+        padding: 0 1.25rem;
+        line-height: 1.5;
+      }
+      header {
+        margin-bottom: 2rem;
+      }
+      header h1 {
+        margin: 0 0 0.35rem;
+        font-size: 1.75rem;
+      }
+      header p {
+        margin: 0;
+        opacity: 0.78;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 1rem;
+      }
+      .card {
+        display: flex;
+        flex-direction: column;
+        gap: 0.65rem;
+        padding: 1.1rem;
+        border: 1px solid color-mix(in srgb, currentColor 16%, transparent);
+        border-radius: 14px;
+        text-decoration: none;
+        color: inherit;
+        transition: transform 0.12s ease, border-color 0.12s ease;
+      }
+      .card:hover {
+        transform: translateY(-2px);
+        border-color: #00a9a5;
+      }
+      .top {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      .top img {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        object-fit: contain;
+      }
+      .top h2 {
+        margin: 0;
+        font-size: 1.05rem;
+      }
+      .card p {
+        margin: 0;
+        font-size: 0.88rem;
+        opacity: 0.78;
+        flex: 1;
+      }
+      .tag {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #00a9a5;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Home Assistant Card Demos</h1>
+      <p>
+        Live interactive previews of custom Lovelace cards from
+        <a href="https://github.com/zubir2k" target="_blank" rel="noopener">github.com/zubir2k</a>,
+        running in the browser with mocked Home Assistant entities.
+      </p>
+    </header>
+
+    <div class="grid">
+      <a class="card" href="./jejakmasjid/">
+        <div class="top">
+          <img src="https://cdn.jsdelivr.net/gh/zubir2k/homeassistant-jejakmasjid@main/custom_components/jejakmasjid/brand/icon.png" alt="" />
+          <h2>Jejak Masjid</h2>
+        </div>
+        <p>Nearby masjid &amp; surau map with check-in simulation, type filters, and navigation links.</p>
+        <span class="tag">custom:jejakmasjid-card →</span>
+      </a>
+
+      <a class="card" href="./rapidbus/">
+        <div class="top">
+          <img src="https://cdn.jsdelivr.net/gh/zubir2k/homeassistant-rapidbus@main/custom_components/prasarana_bus/brand/icon.png" alt="" />
+          <h2>Rapid Bus</h2>
+        </div>
+        <p>Live RapidKL / MRT feeder bus positions, route polyline, and stop arrival ETAs.</p>
+        <span class="tag">custom:rapidbus-card →</span>
+      </a>
+
+      <a class="card" href="./malaysiaairquality/">
+        <div class="top">
+          <img src="https://cdn.jsdelivr.net/gh/zubir2k/homeassistant-malaysiaairquality@main/custom_components/malaysia_airquality/brand/icon.png" alt="" />
+          <h2>Malaysia Air Quality</h2>
+        </div>
+        <p>DOE APIMS air quality stations across Malaysia coloured by official API band.</p>
+        <span class="tag">custom:malaysia-airquality-card →</span>
+      </a>
+
+      <a class="card" href="./caripasarmalam/">
+        <div class="top">
+          <img src="https://cdn.jsdelivr.net/gh/zubir2k/homeassistant-caripasarmalam@master/custom_components/caripasarmalam/brand/icon.png" alt="" />
+          <h2>Cari Pasar Malam</h2>
+        </div>
+        <p>Map and live open/closed schedule of nearby night markets in Malaysia.</p>
+        <span class="tag">custom:caripasarmalam-card →</span>
+      </a>
+
+      <a class="card" href="./esolatgps/">
+        <div class="top">
+          <img src="https://cdn.jsdelivr.net/gh/zubir2k/homeassistant-esolatgps@main/custom_components/esolatgps/brand/icon.png" alt="" />
+          <h2>eSolat GPS</h2>
+        </div>
+        <p>Malaysia prayer times with live countdown ring, Hijri date, sky theme, and reminders.</p>
+        <span class="tag">custom:esolatgps-card →</span>
+      </a>
+
+      <a class="card" href="./dailyhadith/">
+        <div class="top">
+          <img src="https://cdn.jsdelivr.net/gh/zubir2k/homeassistant-dailyhadith@main/custom_components/daily_hadith/brand/icon.png" alt="" />
+          <h2>Daily Hadith</h2>
+        </div>
+        <p>Hadith of the day in Arabic with English/BM toggle, copy button, and Sunnah.com link.</p>
+        <span class="tag">custom:daily-hadith-card →</span>
+      </a>
+
+      <a class="card" href="./mutiarahadith/">
+        <div class="top">
+          <img src="https://cdn.jsdelivr.net/gh/zubir2k/homeassistant-mutiarahadith@main/custom_components/mutiara_hadith/brand/icon.png" alt="" />
+          <h2>Mutiara Hadith</h2>
+        </div>
+        <p>JAKIM MyHadith card with Arabic matan, maksud, penghayatan, and hadith details.</p>
+        <span class="tag">custom:mutiara-hadith-card →</span>
+      </a>
+
+      <a class="card" href="./gasrenew/">
+        <div class="top">
+          <img src="https://cdn.jsdelivr.net/gh/zubir2k/homeassistant-gasrenew@main/custom_components/gas_renew/brand/icon.png" alt="" />
+          <h2>Gas Renew</h2>
+        </div>
+        <p>LPG cylinder remaining level gauge with interactive Renew simulation button.</p>
+        <span class="tag">custom:gas-renew-card →</span>
+      </a>
+    </div>
+  </body>
+</html>

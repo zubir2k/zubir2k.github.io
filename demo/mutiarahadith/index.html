@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mutiara Hadith — Home Assistant Card Demo</title>
+    <script type="module" src="https://demo.home-assistant.io/embed.js"></script>
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/gh/zubir2k/homeassistant-mutiarahadith@main/custom_components/mutiara_hadith/frontend/mutiara-hadith-card.js"
+    ></script>
+    <style>
+      :root { color-scheme: light dark; }
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        max-width: 560px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+        line-height: 1.5;
+      }
+      header { margin-bottom: 1.5rem; }
+      .nav { font-size: 0.85rem; margin-bottom: 0.75rem; }
+      .brand img { height: 40px; width: auto; display: block; margin-bottom: 0.35rem; }
+      header p { margin: 0; opacity: 0.78; font-size: 0.95rem; }
+      header a { color: #00a9a5; text-decoration: none; }
+      header a:hover { text-decoration: underline; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="nav"><a href="../">← All Card Demos</a></div>
+      <div class="brand">
+        <picture>
+          <source
+            media="(prefers-color-scheme: dark)"
+            srcset="https://cdn.jsdelivr.net/gh/zubir2k/homeassistant-mutiarahadith@main/custom_components/mutiara_hadith/brand/dark_logo.png"
+          />
+          <img
+            src="https://cdn.jsdelivr.net/gh/zubir2k/homeassistant-mutiarahadith@main/custom_components/mutiara_hadith/brand/logo.png"
+            alt="Mutiara Hadith"
+          />
+        </picture>
+      </div>
+      <p>
+        Live interactive preview of
+        <a href="https://github.com/zubir2k/homeassistant-mutiarahadith" target="_blank" rel="noopener">
+          zubir2k/homeassistant-mutiarahadith
+        </a>
+        (<code>main</code>) running with mocked Home Assistant entities.
+      </p>
+      <p style="margin-top: 0.75rem;">
+        <a
+          href="https://my.home-assistant.io/redirect/hacs_repository/?owner=zubir2k&repository=homeassistant-mutiarahadith&category=integration"
+          target="_blank"
+          rel="noopener"
+        >
+          <img
+            src="https://my.home-assistant.io/badges/hacs_repository.svg"
+            alt="Open your Home Assistant instance and open a repository inside the Home Assistant Community Store."
+          />
+        </a>
+      </p>
+    </header>
+
+    <ha-embed-provider>
+      <script type="application/json">
+        [
+          {
+            "entity_id": "sensor.mutiara_hadith",
+            "state": "Kelebihan Memberi Salam dan Menyebarkan Kasih Sayang",
+            "attributes": {
+              "friendly_name": "Mutiara Hadith",
+              "hadith_id": 101,
+              "koleksi": "Sahih Muslim",
+              "nombor_hadith": "54",
+              "matan": "لَا تَدْخُلُونَ الْجَنَّةَ حَتَّى تُؤْمِنُوا، وَلَا تُؤْمِنُوا حَتَّى تَحَابُّوا، أَوَلَا أَدُلُّكُمْ عَلَى شَيْءٍ إِذَا فَعَلْتُمُوهُ تَحَابَبْتُمْ؟ أَفْشُوا السَّلَامَ بَيْنَكُمْ [التخريج : رواه مسلم]",
+              "maksud": "Kamu tidak akan masuk syurga sehingga kamu beriman, dan kamu tidak akan beriman sehingga kamu saling berkasih sayang. Mahukah aku tunjukkan kepada kamu sesuatu yang apabila kamu melakukannya kamu akan saling berkasih sayang? Sebarkanlah salam di antara kamu.",
+              "penghayatan": "Ucapan salam bukan sekadar adat sapaan, tetapi doa kesejahteraan yang mengeratkan ukhuwah dan menyuburkan kasih sayang dalam masyarakat.\n\nAmalan memberi salam kepada orang yang dikenali mahupun tidak dikenali membantu mengukuhkan perpaduan sesama Muslim.",
+              "kitab": "Al-Iman - كتاب الإيمان",
+              "bab": "Kelebihan menyebarkan salam",
+              "perawi": "Abu Hurairah r.a.",
+              "status": "Sahih",
+              "sumber_rujukan": [
+                "Sahih Muslim, Kitab al-Iman, Hadis No. 54"
+              ],
+              "attribution": "Sumber: MyHadith, JAKIM",
+              "url": "https://myhadith.islam.gov.my/"
+            }
+          }
+        ]
+      </script>
+
+      <ha-embed-card>
+        <script type="text/yaml">
+          type: custom:mutiara-hadith-card
+          entity: sensor.mutiara_hadith
+          default_tab: maksud
+          pane_height: 220
+          show_takhrij: true
+          show_attribution: true
+        </script>
+      </ha-embed-card>
+    </ha-embed-provider>
+  </body>
+</html>

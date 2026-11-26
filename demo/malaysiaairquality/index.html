@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Malaysia Air Quality — Home Assistant Card Demo</title>
+    <script type="module" src="https://demo.home-assistant.io/embed.js"></script>
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/gh/zubir2k/homeassistant-malaysiaairquality@main/custom_components/malaysia_airquality/frontend/malaysia-airquality-card.js"
+    ></script>
+    <style>
+      :root { color-scheme: light dark; }
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        max-width: 560px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+        line-height: 1.5;
+      }
+      header { margin-bottom: 1.5rem; }
+      .nav { font-size: 0.85rem; margin-bottom: 0.75rem; }
+      .brand img { height: 40px; width: auto; display: block; margin-bottom: 0.35rem; }
+      header p { margin: 0; opacity: 0.78; font-size: 0.95rem; }
+      header a { color: #00a9a5; text-decoration: none; }
+      header a:hover { text-decoration: underline; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="nav"><a href="../">← All Card Demos</a></div>
+      <div class="brand">
+        <picture>
+          <source
+            media="(prefers-color-scheme: dark)"
+            srcset="https://cdn.jsdelivr.net/gh/zubir2k/homeassistant-malaysiaairquality@main/custom_components/malaysia_airquality/brand/dark_logo.png"
+          />
+          <img
+            src="https://cdn.jsdelivr.net/gh/zubir2k/homeassistant-malaysiaairquality@main/custom_components/malaysia_airquality/brand/logo.png"
+            alt="Malaysia Air Quality"
+          />
+        </picture>
+      </div>
+      <p>
+        Live interactive preview of
+        <a href="https://github.com/zubir2k/homeassistant-malaysiaairquality" target="_blank" rel="noopener">
+          zubir2k/homeassistant-malaysiaairquality
+        </a>
+        (<code>main</code>) running with mocked Home Assistant entities.
+      </p>
+      <p style="margin-top: 0.75rem;">
+        <a
+          href="https://my.home-assistant.io/redirect/hacs_repository/?owner=zubir2k&repository=homeassistant-malaysiaairquality&category=integration"
+          target="_blank"
+          rel="noopener"
+        >
+          <img
+            src="https://my.home-assistant.io/badges/hacs_repository.svg"
+            alt="Open your Home Assistant instance and open a repository inside the Home Assistant Community Store."
+          />
+        </a>
+      </p>
+    </header>
+
+    <ha-embed-provider>
+      <script id="entities-json" type="application/json">
+        [
+          {
+            "entity_id": "sensor.malaysia_air_quality_all_stations",
+            "state": "68",
+            "attributes": {
+              "friendly_name": "Malaysia Air Quality All Stations",
+              "selected": "CA001",
+              "stations": [
+                ["CA001", "Cheras, Kuala Lumpur", 3.1062, 101.7179, 68, "PM2.5", "__NOW__", false],
+                ["CA002", "Putrajaya", 2.9318, 101.6819, 44, "PM2.5", "__NOW__", false],
+                ["CA003", "Petaling Jaya", 3.1095, 101.6383, 76, "PM2.5", "__NOW__", false],
+                ["CA004", "Shah Alam", 3.1047, 101.5562, 82, "O3", "__NOW__", false],
+                ["CA005", "Klang", 3.0102, 101.4084, 114, "PM2.5", "__NOW__", false],
+                ["CA006", "Nilai, Negeri Sembilan", 2.8211, 101.8147, 48, "PM10", "__NOW__", false],
+                ["CA007", "Batu Muda, Kuala Lumpur", 3.2124, 101.6822, 62, "PM2.5", "__NOW__", false],
+                ["CA008", "Banting, Selangor", 2.8170, 101.6231, 55, "PM2.5", "__NOW__", false]
+              ]
+            }
+          }
+        ]
+      </script>
+      <script>
+        (function () {
+          const el = document.getElementById("entities-json");
+          el.textContent = el.textContent.replace(/__NOW__/g, new Date().toISOString());
+        })();
+      </script>
+
+      <ha-embed-card>
+        <script type="text/yaml">
+          type: custom:malaysia-airquality-card
+          entity: sensor.malaysia_air_quality_all_stations
+          title: Klang Valley Air Quality
+          height: 400
+          zoom: 10
+          show_legend: true
+          show_mobile: true
+        </script>
+      </ha-embed-card>
+    </ha-embed-provider>
+  </body>
+</html>

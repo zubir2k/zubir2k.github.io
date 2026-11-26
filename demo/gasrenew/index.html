@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gas Renew — Home Assistant Card Demo</title>
+    <script type="module" src="https://demo.home-assistant.io/embed.js"></script>
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/gh/zubir2k/homeassistant-gasrenew@main/custom_components/gas_renew/frontend/gas-renew-card.js"
+    ></script>
+    <style>
+      :root { color-scheme: light dark; }
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        max-width: 560px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+        line-height: 1.5;
+      }
+      header { margin-bottom: 1.5rem; }
+      .nav { font-size: 0.85rem; margin-bottom: 0.75rem; }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        margin-bottom: 0.35rem;
+      }
+      .brand img { height: 36px; width: 36px; border-radius: 8px; }
+      .brand h1 { margin: 0; font-size: 1.45rem; }
+      header p { margin: 0; opacity: 0.78; font-size: 0.95rem; }
+      header a { color: #00a9a5; text-decoration: none; }
+      header a:hover { text-decoration: underline; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="nav"><a href="../">← All Card Demos</a></div>
+      <div class="brand">
+        <img
+          src="https://cdn.jsdelivr.net/gh/zubir2k/homeassistant-gasrenew@main/custom_components/gas_renew/brand/icon.png"
+          alt="Gas Renew"
+        />
+        <h1>Gas Renew</h1>
+      </div>
+      <p>
+        Live interactive preview of
+        <a href="https://github.com/zubir2k/homeassistant-gasrenew" target="_blank" rel="noopener">
+          zubir2k/homeassistant-gasrenew
+        </a>
+        (<code>main</code>) running with mocked Home Assistant entities. Click <strong>Renew</strong> to simulate replacing the cylinder!
+      </p>
+      <p style="margin-top: 0.75rem;">
+        <a
+          href="https://my.home-assistant.io/redirect/hacs_repository/?owner=zubir2k&repository=homeassistant-gasrenew&category=integration"
+          target="_blank"
+          rel="noopener"
+        >
+          <img
+            src="https://my.home-assistant.io/badges/hacs_repository.svg"
+            alt="Open your Home Assistant instance and open a repository inside the Home Assistant Community Store."
+          />
+        </a>
+      </p>
+    </header>
+
+    <ha-embed-provider id="gas-provider">
+      <script type="application/json">
+        [
+          {
+            "entity_id": "sensor.lpg_kitchen",
+            "state": "low",
+            "attributes": {
+              "friendly_name": "Kitchen LPG",
+              "renew_entity": "button.lpg_kitchen_renew",
+              "percentage": 22,
+              "remaining_kg": 3.1,
+              "cylinder_kg": 14,
+              "days_in_use": 35,
+              "duration": 45,
+              "last_change": "2026-10-22T09:00:00+08:00",
+              "expected_empty": "2026-12-06T09:00:00+08:00"
+            }
+          }
+        ]
+      </script>
+
+      <ha-embed-card>
+        <script type="text/yaml">
+          type: custom:gas-renew-card
+          entity: sensor.lpg_kitchen
+          name: Kitchen LPG
+          confirm_renew: false
+        </script>
+      </ha-embed-card>
+    </ha-embed-provider>
+
+    <script type="module">
+      await customElements.whenDefined("ha-embed-provider");
+      const provider = document.getElementById("gas-provider");
+      await provider.updateComplete;
+      const origCallService = provider.hass.callService.bind(provider.hass);
+      provider.hass.callService = async (domain, service, data, target) => {
+        if (domain === "button" && service === "press" && data?.entity_id === "button.lpg_kitchen_renew") {
+          const now = new Date();
+          const expected = new Date(now.getTime() + 45 * 86400000);
+          provider.hass.mockEntities["sensor.lpg_kitchen"].update({
+            state: "full",
+            attributes: {
+              percentage: 100,
+              remaining_kg: 14.0,
+              days_in_use: 0,
+              last_change: now.toISOString(),
+              expected_empty: expected.toISOString(),
+            },
+          });
+          return;
+        }
+        return origCallService(domain, service, data, target);
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rapid Bus — Home Assistant Card Demo</title>
+    <script type="module" src="https://demo.home-assistant.io/embed.js"></script>
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/gh/zubir2k/homeassistant-rapidbus@main/custom_components/prasarana_bus/frontend/rapidbus-card.js"
+    ></script>
+    <style>
+      :root { color-scheme: light dark; }
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        max-width: 560px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+        line-height: 1.5;
+      }
+      header { margin-bottom: 1.5rem; }
+      .nav { font-size: 0.85rem; margin-bottom: 0.75rem; }
+      .brand img { height: 40px; width: auto; display: block; margin-bottom: 0.35rem; }
+      header p { margin: 0; opacity: 0.78; font-size: 0.95rem; }
+      header a { color: #00a9a5; text-decoration: none; }
+      header a:hover { text-decoration: underline; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="nav"><a href="../">← All Card Demos</a></div>
+      <div class="brand">
+        <picture>
+          <source
+            media="(prefers-color-scheme: dark)"
+            srcset="https://cdn.jsdelivr.net/gh/zubir2k/homeassistant-rapidbus@main/custom_components/prasarana_bus/brand/dark_logo.png"
+          />
+          <img
+            src="https://cdn.jsdelivr.net/gh/zubir2k/homeassistant-rapidbus@main/custom_components/prasarana_bus/brand/logo.png"
+            alt="Rapid Bus"
+          />
+        </picture>
+      </div>
+      <p>
+        Live interactive preview of
+        <a href="https://github.com/zubir2k/homeassistant-rapidbus" target="_blank" rel="noopener">
+          zubir2k/homeassistant-rapidbus
+        </a>
+        (<code>main</code>) running with mocked Home Assistant entities.
+      </p>
+      <p style="margin-top: 0.75rem;">
+        <a
+          href="https://my.home-assistant.io/redirect/hacs_repository/?owner=zubir2k&repository=homeassistant-rapidbus&category=integration"
+          target="_blank"
+          rel="noopener"
+        >
+          <img
+            src="https://my.home-assistant.io/badges/hacs_repository.svg"
+            alt="Open your Home Assistant instance and open a repository inside the Home Assistant Community Store."
+          />
+        </a>
+      </p>
+    </header>
+
+    <ha-embed-provider id="demo-provider">
+      <script id="entities-json" type="application/json">
+        [
+          {
+            "entity_id": "sensor.rapidbus_t457_next_bus_eta",
+            "state": "4",
+            "attributes": {
+              "friendly_name": "T457 Next Bus ETA",
+              "route": "T457",
+              "stop_name": "KJ490 Impian Makmur",
+              "latitude": 3.0056,
+              "longitude": 101.7975,
+              "plate": "WXY 4571",
+              "headway_min": 20,
+              "status": "approaching",
+              "upcoming": [
+                {
+                  "plate": "WXY 4571",
+                  "heading_to": "MRT STADIUM KAJANG",
+                  "eta_min": 4,
+                  "distance_km": 1.2,
+                  "latitude": 3.0122,
+                  "longitude": 101.7918,
+                  "last_seen": "__NOW__"
+                },
+                {
+                  "plate": "VAB 8820",
+                  "heading_to": "MRT STADIUM KAJANG",
+                  "eta_min": 18,
+                  "distance_km": 4.6,
+                  "latitude": 2.9920,
+                  "longitude": 101.7872,
+                  "last_seen": "__NOW__"
+                }
+              ]
+            }
+          },
+          {
+            "entity_id": "sensor.rapidbus_t457_active_buses",
+            "state": "2",
+            "attributes": {
+              "friendly_name": "T457 Active Buses",
+              "route": "T457",
+              "route_name": "MRT STADIUM KAJANG - SAUJANA IMPIAN",
+              "route_geojson": {
+                "type": "LineString",
+                "coordinates": [
+                  [101.7862, 2.9942],
+                  [101.7898, 2.9995],
+                  [101.7918, 3.0122],
+                  [101.7975, 3.0056],
+                  [101.8012, 3.0021]
+                ]
+              },
+              "route_stops": [
+                [2.9942, 101.7862, "MRT Stadium Kajang"],
+                [2.9995, 101.7898, "Lotus's Kajang"],
+                [3.0122, 101.7918, "Saujana Impian Golf"],
+                [3.0056, 101.7975, "Impian Makmur"],
+                [3.0021, 101.8012, "Prima Saujana"]
+              ],
+              "buses": [
+                {
+                  "plate": "WXY 4571",
+                  "heading_to": "MRT STADIUM KAJANG",
+                  "latitude": 3.0122,
+                  "longitude": 101.7918,
+                  "bearing": 140,
+                  "speed_kmh": 32,
+                  "eta_min": 4,
+                  "last_seen": "__NOW__"
+                },
+                {
+                  "plate": "VAB 8820",
+                  "heading_to": "MRT STADIUM KAJANG",
+                  "latitude": 2.9920,
+                  "longitude": 101.7872,
+                  "bearing": 25,
+                  "speed_kmh": 28,
+                  "eta_min": 18,
+                  "last_seen": "__NOW__"
+                }
+              ]
+            }
+          }
+        ]
+      </script>
+      <script>
+        (function () {
+          const el = document.getElementById("entities-json");
+          el.textContent = el.textContent.replace(/__NOW__/g, new Date().toISOString());
+        })();
+      </script>
+
+      <ha-embed-card>
+        <script type="text/yaml">
+          type: custom:rapidbus-card
+          entity: sensor.rapidbus_t457_next_bus_eta
+          show_map: true
+          map_height: 300
+          rows: 3
+          show_stops: true
+        </script>
+      </ha-embed-card>
+    </ha-embed-provider>
+  </body>
+</html>

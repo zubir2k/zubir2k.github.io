@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cari Pasar Malam — Home Assistant Card Demo</title>
+    <script type="module" src="https://demo.home-assistant.io/embed.js"></script>
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/gh/zubir2k/homeassistant-caripasarmalam@master/custom_components/caripasarmalam/frontend/caripasarmalam-card.js"
+    ></script>
+    <style>
+      :root { color-scheme: light dark; }
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        max-width: 560px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+        line-height: 1.5;
+      }
+      header { margin-bottom: 1.5rem; }
+      .nav { font-size: 0.85rem; margin-bottom: 0.75rem; }
+      .brand img { height: 40px; width: auto; display: block; margin-bottom: 0.35rem; }
+      header p { margin: 0; opacity: 0.78; font-size: 0.95rem; }
+      header a { color: #00a9a5; text-decoration: none; }
+      header a:hover { text-decoration: underline; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="nav"><a href="../">← All Card Demos</a></div>
+      <div class="brand">
+        <picture>
+          <source
+            media="(prefers-color-scheme: dark)"
+            srcset="https://cdn.jsdelivr.net/gh/zubir2k/homeassistant-caripasarmalam@master/custom_components/caripasarmalam/brand/dark_logo.png"
+          />
+          <img
+            src="https://cdn.jsdelivr.net/gh/zubir2k/homeassistant-caripasarmalam@master/custom_components/caripasarmalam/brand/logo.png"
+            alt="Cari Pasar Malam"
+          />
+        </picture>
+      </div>
+      <p>
+        Live interactive preview of
+        <a href="https://github.com/zubir2k/homeassistant-caripasarmalam" target="_blank" rel="noopener">
+          zubir2k/homeassistant-caripasarmalam
+        </a>
+        (<code>master</code>) running with mocked Home Assistant entities.
+      </p>
+      <p style="margin-top: 0.75rem;">
+        <a
+          href="https://my.home-assistant.io/redirect/hacs_repository/?owner=zubir2k&repository=homeassistant-caripasarmalam&category=integration"
+          target="_blank"
+          rel="noopener"
+        >
+          <img
+            src="https://my.home-assistant.io/badges/hacs_repository.svg"
+            alt="Open your Home Assistant instance and open a repository inside the Home Assistant Community Store."
+          />
+        </a>
+      </p>
+    </header>
+
+    <ha-embed-provider>
+      <script id="entities-json" type="application/json">
+        [
+          {
+            "entity_id": "zone.home",
+            "state": "0",
+            "attributes": {
+              "friendly_name": "Home",
+              "latitude": 3.0056,
+              "longitude": 101.7975
+            }
+          },
+          {
+            "entity_id": "person.zubir",
+            "state": "not_home",
+            "attributes": {
+              "friendly_name": "Zubir",
+              "latitude": 3.139,
+              "longitude": 101.6869
+            }
+          },
+          {
+            "entity_id": "sensor.pasarmalam_home",
+            "state": "1",
+            "attributes": {
+              "friendly_name": "Cari Pasar Malam Home",
+              "source": "zone.home",
+              "origin": [3.0056, 101.7975],
+              "radius_km": 6,
+              "markets": [
+                {
+                  "id": "pasar-malam-saujana-impian",
+                  "name": "Pasar Malam Saujana Impian",
+                  "status": "open",
+                  "distance_km": 0.65,
+                  "latitude": 3.0091,
+                  "longitude": 101.7952,
+                  "district": "Hulu Langat",
+                  "state": "Selangor",
+                  "days": ["thu"],
+                  "today": ["5:00 PM - 10:00 PM"],
+                  "closes_at": "__IN_2H__",
+                  "parking": true,
+                  "toilet": true,
+                  "prayer_room": true
+                },
+                {
+                  "id": "pasar-malam-prima-saujana",
+                  "name": "Pasar Malam Prima Saujana",
+                  "status": "opening_soon",
+                  "distance_km": 1.4,
+                  "latitude": 3.0012,
+                  "longitude": 101.8065,
+                  "district": "Hulu Langat",
+                  "state": "Selangor",
+                  "days": ["fri"],
+                  "opens_at": "__IN_1H__",
+                  "parking": true,
+                  "toilet": false,
+                  "prayer_room": true
+                },
+                {
+                  "id": "pasar-malam-kajang-utama",
+                  "name": "Pasar Malam Taman Kajang Utama",
+                  "status": "closed",
+                  "distance_km": 3.8,
+                  "latitude": 2.9776,
+                  "longitude": 101.7941,
+                  "district": "Hulu Langat",
+                  "state": "Selangor",
+                  "days": ["sat"],
+                  "opens_at": "__IN_2D__",
+                  "parking": true,
+                  "toilet": true,
+                  "prayer_room": false
+                }
+              ]
+            }
+          },
+          {
+            "entity_id": "sensor.pasarmalam_zubir",
+            "state": "1",
+            "attributes": {
+              "friendly_name": "Cari Pasar Malam Zubir",
+              "source": "person.zubir",
+              "origin": [3.139, 101.6869],
+              "radius_km": 6,
+              "markets": [
+                {
+                  "id": "pasar-malam-lorong-tuanku-abdul-rahman",
+                  "name": "Pasar Malam Lorong TAR",
+                  "status": "open",
+                  "distance_km": 1.5,
+                  "latitude": 3.1538,
+                  "longitude": 101.6968,
+                  "district": "Kuala Lumpur",
+                  "state": "WP Kuala Lumpur",
+                  "days": ["sat"],
+                  "today": ["5:00 PM - 11:00 PM"],
+                  "closes_at": "__IN_2H__",
+                  "parking": true,
+                  "toilet": true,
+                  "prayer_room": true
+                },
+                {
+                  "id": "pasar-malam-kampung-baru",
+                  "name": "Pasar Malam Kampung Baru",
+                  "status": "closed",
+                  "distance_km": 2.4,
+                  "latitude": 3.1628,
+                  "longitude": 101.7031,
+                  "district": "Kuala Lumpur",
+                  "state": "WP Kuala Lumpur",
+                  "days": ["sun"],
+                  "opens_at": "__IN_2D__",
+                  "parking": false,
+                  "toilet": true,
+                  "prayer_room": true
+                }
+              ]
+            }
+          }
+        ]
+      </script>
+      <script>
+        (function () {
+          const now = Date.now();
+          const iso = (ms) => new Date(now + ms).toISOString();
+          const el = document.getElementById("entities-json");
+          el.textContent = el.textContent
+            .replace(/__IN_1H__/g, iso(55 * 60000))
+            .replace(/__IN_2H__/g, iso(115 * 60000))
+            .replace(/__IN_2D__/g, iso(48 * 3600000));
+        })();
+      </script>
+
+      <ha-embed-card>
+        <script type="text/yaml">
+          type: custom:caripasarmalam-card
+          entities:
+            - sensor.pasarmalam_home
+            - sensor.pasarmalam_zubir
+          map_height: 320
+          list_limit: 6
+          show_closed: true
+          show_radius: true
+        </script>
+      </ha-embed-card>
+    </ha-embed-provider>
+  </body>
+</html>
