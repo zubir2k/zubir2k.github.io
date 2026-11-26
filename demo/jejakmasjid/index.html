@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Jejak Masjid — Home Assistant Card Demo</title>
+    <script
+      type="module"
+      src="https://demo.home-assistant.io/embed.js"
+    ></script>
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/gh/zubir2k/homeassistant-jejakmasjid@main/custom_components/jejakmasjid/frontend/jejakmasjid-card.js"
+    ></script>
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        max-width: 560px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+        line-height: 1.5;
+      }
+      header {
+        margin-bottom: 1.5rem;
+      }
+      header h1 {
+        margin: 0 0 0.25rem;
+        font-size: 1.5rem;
+      }
+      header p {
+        margin: 0;
+        opacity: 0.75;
+        font-size: 0.95rem;
+      }
+      header a {
+        color: #00a9a5;
+        text-decoration: none;
+      }
+      header a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Jejak Masjid Card Demo</h1>
+      <p>
+        Live interactive preview of
+        <a href="https://github.com/zubir2k/homeassistant-jejakmasjid" target="_blank" rel="noopener">
+          zubir2k/homeassistant-jejakmasjid
+        </a>
+        (<code>main</code>) running with mocked Home Assistant entities.
+      </p>
+    </header>
+
+    <ha-embed-provider>
+      <script type="application/json">
+        [
+          {
+            "entity_id": "zone.home",
+            "state": "0",
+            "attributes": {
+              "friendly_name": "Home",
+              "latitude": 3.0056,
+              "longitude": 101.7975
+            }
+          },
+          {
+            "entity_id": "person.zubir",
+            "state": "not_home",
+            "attributes": {
+              "friendly_name": "Zubir",
+              "latitude": 3.1419,
+              "longitude": 101.69
+            }
+          },
+          {
+            "entity_id": "sensor.jejak_masjid_home",
+            "state": "Masjid Saujana Impian",
+            "attributes": {
+              "friendly_name": "Jejak Masjid Home",
+              "source": "zone.home",
+              "radius_km": 5,
+              "fetched": "2026-11-26T09:00:00+08:00",
+              "nearby": [
+                {
+                  "name": "MASJID SAUJANA IMPIAN",
+                  "type": "masjid",
+                  "distance_km": 0.45,
+                  "latitude": 3.0085,
+                  "longitude": 101.7952
+                },
+                {
+                  "name": "SURAU AL-IKHLAS",
+                  "type": "surau",
+                  "distance_km": 0.82,
+                  "latitude": 3.0018,
+                  "longitude": 101.8015
+                },
+                {
+                  "name": "MASJID JAMEK KAJANG",
+                  "type": "masjid",
+                  "distance_km": 2.3,
+                  "latitude": 2.9935,
+                  "longitude": 101.7879
+                },
+                {
+                  "name": "MADRASAH AL-HIDAYAH",
+                  "type": "madrasah",
+                  "distance_km": 3.1,
+                  "latitude": 2.9991,
+                  "longitude": 101.7824
+                }
+              ]
+            }
+          },
+          {
+            "entity_id": "sensor.jejak_masjid_zubir",
+            "state": "Masjid Negara",
+            "attributes": {
+              "friendly_name": "Jejak Masjid Zubir",
+              "source": "person.zubir",
+              "radius_km": 5,
+              "fetched": "2026-11-26T09:00:00+08:00",
+              "nearby": [
+                {
+                  "name": "MASJID NEGARA",
+                  "type": "masjid",
+                  "distance_km": 0.6,
+                  "latitude": 3.1419,
+                  "longitude": 101.6918
+                },
+                {
+                  "name": "MASJID JAMEK SULTAN ABDUL SAMAD",
+                  "type": "masjid",
+                  "distance_km": 0.95,
+                  "latitude": 3.1489,
+                  "longitude": 101.6957
+                },
+                {
+                  "name": "SURAU KL SENTRAL",
+                  "type": "surau",
+                  "distance_km": 1.1,
+                  "latitude": 3.1342,
+                  "longitude": 101.6861
+                }
+              ]
+            }
+          }
+        ]
+      </script>
+
+      <ha-embed-card>
+        <script type="text/yaml">
+          type: custom:jejakmasjid-card
+          entity: sensor.jejak_masjid_zubir
+          title: Jejak Masjid
+          show_map: true
+          map_height: 280
+          max_items: 8
+          filter: all
+          show_people: true
+        </script>
+      </ha-embed-card>
+    </ha-embed-provider>
+  </body>
+</html>
