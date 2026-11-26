@@ -24,6 +24,7 @@
       header p { margin: 0; opacity: 0.78; font-size: 0.95rem; }
       header a { color: #00a9a5; text-decoration: none; }
       header a:hover { text-decoration: underline; }
+      ha-embed-provider { display: flex; flex-direction: column; gap: 16px; }
     </style>
   </head>
   <body>
@@ -97,6 +98,20 @@
           el.textContent = el.textContent.replace(/__TODAY__/g, parts);
         })();
       </script>
+
+      <ha-embed-card>
+        <script type="text/yaml">
+          type: custom:esolatgps-card
+          entity: sensor.esolat_home
+          theme: sky
+          language: ms
+          layout: compact
+          show_clock: true
+          show_moon: true
+          show_location: true
+          show_slides: true
+        </script>
+      </ha-embed-card>
 
       <ha-embed-card>
         <script type="text/yaml">
