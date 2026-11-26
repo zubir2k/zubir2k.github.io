@@ -26,9 +26,16 @@
       header {
         margin-bottom: 1.5rem;
       }
-      header h1 {
-        margin: 0 0 0.25rem;
-        font-size: 1.5rem;
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 0.35rem;
+      }
+      .brand img {
+        height: 40px;
+        width: auto;
+        display: block;
       }
       header p {
         margin: 0;
@@ -46,7 +53,18 @@
   </head>
   <body>
     <header>
-      <h1>Jejak Masjid Card Demo</h1>
+      <div class="brand">
+        <picture>
+          <source
+            media="(prefers-color-scheme: dark)"
+            srcset="https://cdn.jsdelivr.net/gh/zubir2k/homeassistant-jejakmasjid@main/custom_components/jejakmasjid/brand/dark_logo.png"
+          />
+          <img
+            src="https://cdn.jsdelivr.net/gh/zubir2k/homeassistant-jejakmasjid@main/custom_components/jejakmasjid/brand/logo.png"
+            alt="Jejak Masjid"
+          />
+        </picture>
+      </div>
       <p>
         Live interactive preview of
         <a href="https://github.com/zubir2k/homeassistant-jejakmasjid" target="_blank" rel="noopener">
@@ -73,8 +91,8 @@
             "state": "not_home",
             "attributes": {
               "friendly_name": "Zubir",
-              "latitude": 3.1419,
-              "longitude": 101.69
+              "latitude": 3.14195,
+              "longitude": 101.69175
             }
           },
           {
@@ -127,9 +145,11 @@
               "fetched": "2026-11-26T09:00:00+08:00",
               "nearby": [
                 {
+                  "id": "masjid-negara",
                   "name": "MASJID NEGARA",
                   "type": "masjid",
-                  "distance_km": 0.6,
+                  "distance_km": 0.01,
+                  "distance_m": 10,
                   "latitude": 3.1419,
                   "longitude": 101.6918
                 },
@@ -163,6 +183,8 @@
           max_items: 8
           filter: all
           show_people: true
+          show_checkin: true
+          checkin_radius_m: 50
         </script>
       </ha-embed-card>
     </ha-embed-provider>
