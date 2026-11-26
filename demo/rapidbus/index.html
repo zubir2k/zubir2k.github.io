@@ -46,7 +46,9 @@
         <a href="https://github.com/zubir2k/homeassistant-rapidbus" target="_blank" rel="noopener">
           zubir2k/homeassistant-rapidbus
         </a>
-        (<code>main</code>) running with mocked Home Assistant entities.
+        (<code>main</code>) running with mocked Home Assistant entities. The route is the real
+        RapidKL <strong>450</strong> (Hentian Kajang ~ Hab Pasar Seni) from the GTFS feed; the two
+        buses are simulated and move along it in real time.
       </p>
       <p style="margin-top: 0.85rem; margin-bottom: 0.35rem; font-size: 0.85rem;">Add to your Home Assistant via Marketplace/HACS:</p>
       <p style="margin-top: 0;">
@@ -64,109 +66,188 @@
     </header>
 
     <ha-embed-provider id="demo-provider">
-      <script id="entities-json" type="application/json">
-        [
-          {
-            "entity_id": "sensor.rapidbus_t457_next_bus_eta",
-            "state": "4",
-            "attributes": {
-              "friendly_name": "T457 Next Bus ETA",
-              "route": "T457",
-              "stop_name": "KJ490 Impian Makmur",
-              "latitude": 3.0056,
-              "longitude": 101.7975,
-              "plate": "WXY 4571",
-              "headway_min": 20,
-              "status": "approaching",
-              "upcoming": [
-                {
-                  "plate": "WXY 4571",
-                  "heading_to": "MRT STADIUM KAJANG",
-                  "eta_min": 4,
-                  "distance_km": 1.2,
-                  "latitude": 3.0122,
-                  "longitude": 101.7918,
-                  "last_seen": "__NOW__"
-                },
-                {
-                  "plate": "VAB 8820",
-                  "heading_to": "MRT STADIUM KAJANG",
-                  "eta_min": 18,
-                  "distance_km": 4.6,
-                  "latitude": 2.9920,
-                  "longitude": 101.7872,
-                  "last_seen": "__NOW__"
-                }
-              ]
+      <script id="entities-json" type="application/json">[]</script>
+      <script>
+        /*
+         * Route 450 geometry, stops and the chosen stop come from the RapidKL GTFS static feed,
+         * processed with the integration's own gtfs_static.py (route_geojson + route_stops).
+         * Only the two buses are simulated.
+         */
+        window.RB = (function () {
+          const ROUTE = {"geojson":{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"LineString","coordinates":[[101.79194,2.95698],[101.791845,2.956803],[101.792147,2.956618],[101.792448,2.957403],[101.792563,2.959677],[101.79116,2.96423],[101.789935,2.967856],[101.789766,2.968464],[101.789703,2.969182],[101.789721,2.974364],[101.78986,2.97637],[101.78972,2.97746],[101.789737,2.979054],[101.78987,2.98312],[101.789652,2.984866],[101.78965,2.98777],[101.78857,2.99046],[101.78763,2.99171],[101.78681,2.99189],[101.78648,2.99339],[101.7866,2.99519],[101.78689,2.99547],[101.78766,2.99567],[101.78758,2.99648],[101.78735,2.99689],[101.78618,2.99797],[101.78535,2.99888],[101.7833,3.00134],[101.78306,3.00172],[101.78251,3.00355],[101.782238,3.005149],[101.781734,3.006876],[101.781218,3.007929],[101.779995,3.009992],[101.777638,3.013589],[101.77733,3.014356],[101.775555,3.021457],[101.774829,3.02333],[101.773622,3.026091],[101.77312,3.02668],[101.77208,3.02757],[101.77047,3.02886],[101.76928,3.02967],[101.76902,3.03011],[101.76896,3.03038],[101.76897,3.03065],[101.76912,3.03106],[101.76992,3.03259],[101.77088,3.03503],[101.77267,3.03864],[101.77383,3.04192],[101.77553,3.04571],[101.7758,3.04657],[101.77598,3.04749],[101.77596,3.04919],[101.77573,3.05005],[101.77549,3.05055],[101.77447,3.05187],[101.77416,3.05263],[101.77406,3.05365],[101.7741,3.05683],[101.774038,3.057992],[101.77353,3.06004],[101.77321,3.06073],[101.77391,3.06096],[101.77441,3.06139],[101.77527,3.06269],[101.775489,3.063445],[101.775397,3.064909],[101.775234,3.065656],[101.774906,3.066271],[101.774469,3.066782],[101.773895,3.067246],[101.773285,3.06758],[101.771713,3.067732],[101.770228,3.068878],[101.769637,3.069544],[101.76731,3.07114],[101.76646,3.0716],[101.76599,3.0717],[101.765,3.07148],[101.76339,3.06995],[101.76308,3.06987],[101.76269,3.06998],[101.76238,3.07043],[101.76256,3.07154],[101.76233,3.07193],[101.76118,3.07312],[101.75936,3.07471],[101.75847,3.07516],[101.75708,3.0757],[101.75594,3.07598],[101.75035,3.07809],[101.74921,3.07836],[101.74434,3.07914],[101.74364,3.07934],[101.74291,3.07978],[101.74226,3.08059],[101.74198,3.08129],[101.74181,3.08228],[101.74168,3.08605],[101.74135,3.08777],[101.73834,3.09748],[101.73797,3.0982],[101.73755,3.09876],[101.73353,3.10291],[101.73121,3.10632],[101.73083,3.107],[101.72953,3.11124],[101.72941,3.11133],[101.72902,3.11215],[101.72846,3.11268],[101.72833,3.11293],[101.7283,3.11331],[101.7286,3.11392],[101.72864,3.11421],[101.72814,3.11601],[101.72802,3.11837],[101.72849,3.12096],[101.72854,3.12241],[101.72682,3.12508],[101.7265,3.12542],[101.72593,3.125792],[101.72463,3.12627],[101.72259,3.12729],[101.71847,3.1302],[101.71748,3.13099],[101.71773,3.13168],[101.718027,3.13314],[101.718478,3.134563],[101.717115,3.134995],[101.715461,3.135051],[101.714894,3.135017],[101.714165,3.134848],[101.71325,3.13427],[101.71185,3.13625],[101.7104,3.13742],[101.70996,3.13797],[101.70967,3.13971],[101.70727,3.14332],[101.70682,3.14376],[101.70521,3.14473],[101.70422,3.14522],[101.699899,3.146127],[101.69972,3.146089],[101.699308,3.145569],[101.699045,3.145419],[101.698019,3.145346],[101.696652,3.145089],[101.696624,3.143412],[101.696487,3.14265],[101.69584,3.142767],[101.695803,3.142977]]},"properties":{"route":"450","heading_to":"HAB PASAR SENI"}},{"type":"Feature","geometry":{"type":"LineString","coordinates":[[101.69579,3.143015],[101.695714,3.14464],[101.696053,3.144911],[101.696858,3.145252],[101.698971,3.14552],[101.69976,3.1462],[101.69999,3.14626],[101.7031,3.14552],[101.70425,3.14535],[101.70502,3.14497],[101.70673,3.14396],[101.70733,3.14338],[101.70837,3.14186],[101.70898,3.14082],[101.70956,3.140121],[101.709752,3.139725],[101.71003,3.13802],[101.71035,3.13758],[101.71188,3.13637],[101.71325,3.13442],[101.71398,3.13491],[101.71472,3.13512],[101.71532,3.13518],[101.71674,3.13515],[101.71862,3.13464],[101.71812,3.13306],[101.71805,3.1324],[101.71776,3.13128],[101.71779,3.13108],[101.7191,3.12989],[101.72176,3.12798],[101.72431,3.12654],[101.72502,3.12627],[101.72564,3.12626],[101.72603,3.12613],[101.72684,3.12531],[101.72877,3.12225],[101.72874,3.12157],[101.72818,3.11817],[101.72825,3.116],[101.728981,3.113145],[101.729215,3.112371],[101.729512,3.11172],[101.73087,3.10719],[101.7313,3.10642],[101.7333,3.10344],[101.73537,3.10132],[101.73748,3.09897],[101.73797,3.09836],[101.73838,3.09763],[101.73932,3.09499],[101.7416,3.08781],[101.74186,3.08638],[101.74198,3.08222],[101.742067,3.08158],[101.742246,3.080933],[101.742566,3.080292],[101.742929,3.079902],[101.74363,3.079469],[101.744533,3.079219],[101.74773,3.07876],[101.75002,3.07834],[101.75254,3.07749],[101.756,3.07614],[101.75871,3.07554],[101.759811,3.075106],[101.76144,3.073682],[101.7619,3.07288],[101.763132,3.071568],[101.763739,3.071159],[101.764023,3.071065],[101.764397,3.071194],[101.76498,3.07156],[101.76583,3.07177],[101.76641,3.07171],[101.76789,3.07086],[101.76919,3.06999],[101.77072,3.06856],[101.77168,3.06782],[101.77205,3.06773],[101.77304,3.06768],[101.773781,3.06743],[101.774696,3.066666],[101.775059,3.066239],[101.77532,3.065746],[101.775604,3.064425],[101.775659,3.06342],[101.775583,3.063094],[101.775289,3.062413],[101.77448,3.06133],[101.77411,3.06101],[101.77389,3.06048],[101.77413,3.05965],[101.77421,3.05898],[101.77416,3.05856],[101.7743,3.05678],[101.77426,3.05308],[101.77436,3.05256],[101.77458,3.05203],[101.77604,3.05006],[101.77627,3.0495],[101.77651,3.04843],[101.7764,3.04722],[101.77601,3.04607],[101.77416,3.04235],[101.77289,3.03879],[101.77111,3.03519],[101.76995,3.03216],[101.76982,3.03093],[101.76989,3.03026],[101.76999,3.02986],[101.77025,3.02935],[101.7706,3.02888],[101.77323,3.02669],[101.773691,3.026139],[101.77494,3.02327],[101.77571,3.0212],[101.77754,3.014],[101.77783,3.01345],[101.7795,3.01098],[101.781377,3.007845],[101.781676,3.007197],[101.781993,3.006454],[101.78275,3.00316],[101.78323,3.00162],[101.78353,3.00117],[101.78608,2.9982],[101.78747,2.99694],[101.78769,2.99655],[101.78783,2.99321],[101.78779,2.99182],[101.787944,2.991494],[101.788315,2.991106],[101.788709,2.990484],[101.789755,2.988063],[101.789792,2.985585],[101.78997,2.98349],[101.789841,2.978075],[101.78995,2.97637],[101.78982,2.97401],[101.78982,2.96915],[101.789987,2.968206],[101.79264,2.95983],[101.79257,2.95757],[101.79228,2.95658],[101.79217,2.95657],[101.79049,2.9575],[101.79042,2.95762],[101.79075,2.9584],[101.79214,2.95769],[101.79194,2.95698]]},"properties":{"route":"450","heading_to":"HENTIAN KAJANG"}}]},"stops":[[2.957004,101.791719,"Hentian Kajang"],[2.961152,101.792062,"Plaza Perabot"],[2.9646,101.790964,"Shell"],[2.994009,101.78641,"Mrt Stadium Kajang"],[2.991911,101.787865,"Bandar Kajang"],[2.963936,101.791419,"Kajang 2/Shell (Opp)"],[2.960963,101.792391,"Plaza Perabot (Opp)"],[3.071304,101.767286,"Taman Suntex"],[3.070485,101.768744,"Sk Bt 9 (Opp)"],[3.068927,101.770573,"Balai Polis Bt 9 (Opp)"],[3.068623,101.770524,"Balai Polis Bt 9"],[3.069871,101.769157,"Sk Bt 9"],[3.071162,101.767147,"Taman Suntex"],[3.086018,101.741545,"Taman Bukit Hijau"],[3.088402,101.74109,"Cheras Leisure Mall (Opp)"],[3.105244,101.731771,"Mrt Taman Midah Pintu A"],[3.110171,101.729763,"Velodrom Business Park"],[3.116736,101.727994,"Kompleks Darul Puteri (Opp)/Flat Sri Sabah"],[3.119081,101.728017,"M Vertica Residences/Stadium Badminton"],[3.123345,101.727828,"Lrt Maluri"],[3.124434,101.727122,"Mrt Maluri Pintu B/Aeon Maluri (Opp)"],[3.126683,101.72353,"Sunway Velocity Mall (Opp)"],[3.128018,101.721462,"Sunway Medical Velocity (Opp)"],[3.129207,101.71979,"Warisan Cityview"],[3.136304,101.711621,"Lrt Pudu/Majestic"],[3.139651,101.709581,"Bbcc/Menara Eco World"],[3.146476,101.698192,"(M) Kl101 Hub Lebuh Pudu"],[3.145222,101.70462,"Hospital Tung Shin"],[3.144438,101.706043,"Hotel Mercure (Opp)"],[3.138532,101.710008,"Furama"],[3.136449,101.711871,"Lrt Pudu/Majestic (Opp)"],[3.130384,101.718712,"All Saints Church"],[3.128962,101.720501,"Warisan Cityview (Opp)"],[3.127367,101.722803,"Sunway Medical Velocity"],[3.125323,101.72698,"Aeon Maluri"],[3.119263,101.728402,"M Vertica Residences (Opp)/Stadium Badminto"],[3.116648,101.728274,"Kompleks Darul Puteri"],[3.109625,101.730255,"Bhp Cheras"],[3.102694,101.734135,"Taman Midah (Utara)"],[3.091753,101.740472,"Mrt Taman Mutiara Pintu B"],[3.08921,101.741166,"Cheras Leisure Mall"],[3.085595,101.74198,"Taman Bukit Hijau"],[3.135009,101.716743,"Plaza Elektronik"],[3.135202,101.714747,"Kompleks E-Mart"],[3.135237,101.716679,"Plaza Elektronik"],[3.133722,101.718383,"Wisma Indah"],[3.076322,101.755979,"Pga/Cuepacs"],[3.067641,101.773536,"Sk Batu 9"],[3.064788,101.775537,"Sra Batu 10"],[3.062117,101.775123,"Masjid Bt 10/Kilang Papan"],[3.059464,101.774237,"Masjid Batu 10 Cheras"],[3.042845,101.774955,"Spg Pekan Bt 11"],[3.039165,101.773322,"Pusat Flora Cheras"],[3.036248,101.771877,"Spg Sg Long"],[3.030483,101.769883,"Taman Desa Baru (Utara)"],[3.028144,101.771646,"Taman Desa Baru (Selatan)"],[3.025809,101.773917,"Taman Koperasi Cuepacs/Jln Sarjan Mat"],[3.024653,101.774385,"Premis Lot 4291"],[3.021924,101.775569,"Masjid Sg Sekamat (Opp)"],[3.01659,101.776961,"Shell Taman Delima"],[3.013138,101.778157,"Taman Mesra"],[3.008343,101.781179,"Rtm Kajang"],[3.005816,101.782232,"Smk Saas"],[2.998728,101.785693,"Kpj Kajang"],[2.995466,101.787812,"Kajang Plaza Medical Centre"],[2.985972,101.789854,"Masjid India Kajang"],[2.982685,101.790098,"Mrt Kajang"],[2.980828,101.789899,"Taman Hijau"],[2.979076,101.789857,"Taman Sri Reko"],[2.974815,101.789903,"Taman Sri Langat 2"],[2.971819,101.789861,"Saville Kajang (Opp)"],[2.967952,101.789866,"Reko Sentral"],[2.972186,101.789639,"Saville Kajang"],[2.974412,101.78965,"Taman Sri Langat 2"],[2.979072,101.789699,"Taman Sri Reko"],[2.980756,101.789711,"Taman Hijau"],[2.983779,101.789783,"Mrt Kajang (Opp)"],[2.985622,101.789608,"Masjid India Kajang (Opp)"],[2.99163,101.787407,"Maybank Pekan Kajang"],[2.99869,101.785403,"Kpj Kajang (Opp)"],[3.001359,101.783176,"Mrt Sg Jernih (Opp)"],[3.006579,101.781778,"Smk Saas (Opp)"],[3.008403,101.780929,"Rtm Kajang (Opp)"],[3.011859,101.778823,"Taman Mesra"],[3.016996,101.776632,"Taman Delima"],[3.020792,101.775679,"Masjid Sg Sekamat"],[3.024425,101.77431,"Lot 4291 (Opp)"],[3.028564,101.770686,"Taman Desa Baru"],[3.03786,101.771699,"Spg Sg Long"],[3.044146,101.774538,"Kg Baru Bt 11"],[3.052127,101.77405,"Spg Cheras Perdana"],[3.059652,101.773479,"Tm Batu 9"],[3.062315,101.774975,"Kilang Papan"],[3.064929,101.775333,"Sma Batu 10"],[3.066122,101.774882,"Beaconhouse Sri Murni"],[3.07481,101.758989,"Plaza Tol Batu 9"],[3.076363,101.754574,"Pga/Maktab Pdrm"],[3.133487,101.718056,"Wisma Indah"],[3.144295,101.705731,"Hotel Mercure"],[3.146744,101.698695,"Hab Lebuh Pudu"]],"stop":{"id":"1001747","name":"KL1723 CHERAS LEISURE MALL (OPP)","lat":3.088402,"lon":101.74109}};
+          const R = 6371.0088, rad = (x) => (x * Math.PI) / 180;
+          const hav = (a, b) => {
+            const dp = rad(b[0] - a[0]), dl = rad(b[1] - a[1]);
+            const h = Math.sin(dp / 2) ** 2 + Math.cos(rad(a[0])) * Math.cos(rad(b[0])) * Math.sin(dl / 2) ** 2;
+            return 2 * R * Math.asin(Math.sqrt(h));
+          };
+          const brg = (a, b) => {
+            const p1 = rad(a[0]), p2 = rad(b[0]), dl = rad(b[1] - a[1]);
+            const x = Math.sin(dl) * Math.cos(p2);
+            const y = Math.cos(p1) * Math.sin(p2) - Math.sin(p1) * Math.cos(p2) * Math.cos(dl);
+            return ((Math.atan2(x, y) * 180) / Math.PI + 360) % 360;
+          };
+          const line = (headsign) => {
+            const f = ROUTE.geojson.features.find((x) => x.properties.heading_to === headsign);
+            const pts = f.geometry.coordinates.map(([lon, lat]) => [lat, lon]);
+            const cum = [0];
+            for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + hav(pts[i - 1], pts[i]));
+            return { headsign, pts, cum, length: cum[cum.length - 1] };
+          };
+          // position + heading at `km` along a line
+          const at = (ln, km) => {
+            km = Math.max(0, Math.min(ln.length, km));
+            let i = 1;
+            while (i < ln.cum.length - 1 && ln.cum[i] < km) i++;
+            const a = ln.pts[i - 1], b = ln.pts[i];
+            const seg = ln.cum[i] - ln.cum[i - 1] || 1e-9;
+            const t = (km - ln.cum[i - 1]) / seg;
+            return { lat: a[0] + (b[0] - a[0]) * t, lon: a[1] + (b[1] - a[1]) * t, bearing: Math.round(brg(a, b)) };
+          };
+          // km along a line of the point nearest to lat/lon
+          const project = (ln, lat, lon) => {
+            const kx = Math.cos(rad(lat)) * 111.32, ky = 110.574;
+            let best = [Infinity, 0];
+            for (let i = 0; i < ln.pts.length - 1; i++) {
+              const ax = (ln.pts[i][1] - lon) * kx, ay = (ln.pts[i][0] - lat) * ky;
+              const bx = (ln.pts[i + 1][1] - lon) * kx, by = (ln.pts[i + 1][0] - lat) * ky;
+              const dx = bx - ax, dy = by - ay, s2 = dx * dx + dy * dy;
+              const t = s2 ? Math.max(0, Math.min(1, -(ax * dx + ay * dy) / s2)) : 0;
+              const d = Math.hypot(ax + t * dx, ay + t * dy);
+              if (d < best[0]) best = [d, ln.cum[i] + t * (ln.cum[i + 1] - ln.cum[i])];
             }
-          },
-          {
-            "entity_id": "sensor.rapidbus_t457_active_buses",
-            "state": "2",
-            "attributes": {
-              "friendly_name": "T457 Active Buses",
-              "route": "T457",
-              "route_name": "MRT STADIUM KAJANG - SAUJANA IMPIAN",
-              "route_geojson": {
-                "type": "LineString",
-                "coordinates": [
-                  [101.7862, 2.9942],
-                  [101.7898, 2.9995],
-                  [101.7918, 3.0122],
-                  [101.7975, 3.0056],
-                  [101.8012, 3.0021]
-                ]
-              },
-              "route_stops": [
-                [2.9942, 101.7862, "MRT Stadium Kajang"],
-                [2.9995, 101.7898, "Lotus's Kajang"],
-                [3.0122, 101.7918, "Saujana Impian Golf"],
-                [3.0056, 101.7975, "Impian Makmur"],
-                [3.0021, 101.8012, "Prima Saujana"]
-              ],
-              "buses": [
-                {
-                  "plate": "WXY 4571",
-                  "heading_to": "MRT STADIUM KAJANG",
-                  "latitude": 3.0122,
-                  "longitude": 101.7918,
-                  "bearing": 140,
-                  "speed_kmh": 32,
-                  "eta_min": 4,
-                  "last_seen": "__NOW__"
+            return best[1];
+          };
+
+          const inbound = line("HAB PASAR SENI");
+          const outbound = line("HENTIAN KAJANG");
+          const stop = ROUTE.stop;
+          const stopAlong = project(inbound, stop.lat, stop.lon);
+          const oppAlong = project(outbound, stop.lat, stop.lon);
+          const AVG_KMH = 26.3; // scheduled average speed of route 450 (from stop_times)
+          const HEADWAY = 40;
+
+          // Bus 1 comes up Jalan Cheras toward your stop; bus 2 runs the other way toward Kajang.
+          const START_1 = stopAlong - 3.0, START_2 = oppAlong - 1.2;
+          const buses = [
+            { plate: "VEK 4501", ln: inbound, along: START_1, start: START_1, speed: 31, until: stopAlong + 0.15 },
+            { plate: "VEK 4517", ln: outbound, along: START_2, start: START_2, speed: 27, until: START_2 + 4.5 },
+          ];
+
+          const iso = (ms) => new Date(ms).toISOString();
+          const busAttr = (b, nowIso) => {
+            const p = at(b.ln, b.along);
+            const o = {
+              plate: b.plate, latitude: +p.lat.toFixed(6), longitude: +p.lon.toFixed(6),
+              speed_kmh: b.speed, bearing: p.bearing, heading_to: b.ln.headsign, last_seen: nowIso,
+            };
+            if (b.ln === inbound && b.along <= stopAlong + 0.15) {
+              const remaining = Math.max(0, stopAlong - b.along);
+              const kmh = 0.7 * AVG_KMH + 0.3 * Math.min(b.speed, 60); // same blend as gtfs_static.eta_to_stop
+              o.eta_min = Math.round((remaining / kmh) * 600) / 10;
+              o.distance_km = Math.round(remaining * 100) / 100;
+            }
+            return o;
+          };
+
+          const loadedAt = Date.now();
+          let schedCache = null;
+          function entities() {
+            const now = Date.now(), nowIso = iso(now);
+            const all = buses.map((b) => busAttr(b, nowIso));
+            const upcoming = all.filter((b) => b.eta_min != null).sort((a, b) => a.eta_min - b.eta_min);
+            const next = upcoming[0];
+            const status = !next ? "none_heading_here" : next.distance_km <= 0.15 ? "at_stop" : "approaching";
+            // timetable rows after the live bus (frequency based, ~40 min headway), fixed at page load
+            if (!schedCache) {
+              const firstEta = next ? next.eta_min : 0;
+              schedCache = [1, 2, 3].map((n) => {
+              const t = new Date(loadedAt + (firstEta + n * HEADWAY) * 60000);
+              t.setSeconds(0, 0);
+              return {
+                time: t.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", timeZone: "Asia/Kuala_Lumpur" }),
+                datetime: t.toISOString(), heading_to: "HAB PASAR SENI",
+              };
+              });
+            }
+            const sched = schedCache;
+            return [
+              {
+                entity_id: "sensor.rapidbus_450_next_bus_eta",
+                state: next ? String(next.eta_min) : "unknown",
+                attributes: {
+                  friendly_name: "450 Next bus ETA", unit_of_measurement: "min", device_class: "duration",
+                  stop_id: stop.id, stop_name: stop.name, latitude: stop.lat, longitude: stop.lon,
+                  estimated: true, status, eta_source: next ? "live" : null, upcoming,
+                  headway_min: HEADWAY, plate: next?.plate, heading_to: next?.heading_to,
                 },
-                {
-                  "plate": "VAB 8820",
-                  "heading_to": "MRT STADIUM KAJANG",
-                  "latitude": 2.9920,
-                  "longitude": 101.7872,
-                  "bearing": 25,
-                  "speed_kmh": 28,
-                  "eta_min": 18,
-                  "last_seen": "__NOW__"
-                }
-              ]
+              },
+              {
+                entity_id: "sensor.rapidbus_450_next_bus_status",
+                state: status,
+                attributes: { friendly_name: "450 Next bus status", plate: next?.plate, eta_min: next?.eta_min, distance_km: next?.distance_km },
+              },
+              {
+                entity_id: "sensor.rapidbus_450_active_buses",
+                state: String(all.length),
+                attributes: {
+                  friendly_name: "450 Active buses", unit_of_measurement: "buses",
+                  route: "450", route_name: "Hentian Kajang ~ Hab Pasar Seni",
+                  buses: all, route_geojson: ROUTE.geojson, route_stops: ROUTE.stops,
+                },
+              },
+              {
+                entity_id: "sensor.rapidbus_450_next_scheduled_bus",
+                state: sched[0].datetime,
+                attributes: { friendly_name: "450 Next scheduled bus", device_class: "timestamp", headway_min: HEADWAY, frequency_based: true, upcoming: sched },
+              },
+            ];
+          }
+
+          // advance the buses by `sec` seconds of driving; loop back when they finish their run
+          function step(sec) {
+            for (const b of buses) {
+              b.along += (b.speed * sec) / 3600;
+              if (b.along > b.until) b.along = b.start;
             }
           }
-        ]
-      </script>
-      <script>
-        (function () {
-          const el = document.getElementById("entities-json");
-          el.textContent = el.textContent.replace(/__NOW__/g, new Date().toISOString());
+
+          return { entities, step };
         })();
+        document.getElementById("entities-json").textContent = JSON.stringify(window.RB.entities());
       </script>
 
       <ha-embed-card>
         <script type="text/yaml">
           type: custom:rapidbus-card
-          entity: sensor.rapidbus_t457_next_bus_eta
+          entity: sensor.rapidbus_450_next_bus_eta
           show_map: true
-          map_height: 300
+          map_height: 320
           rows: 3
           show_stops: true
         </script>
       </ha-embed-card>
     </ha-embed-provider>
+
+    <script type="module">
+      // Move the simulated buses every few seconds (same mock-entity hook as the Gas Renew demo).
+      try {
+        await customElements.whenDefined("ha-embed-provider");
+        const provider = document.getElementById("demo-provider");
+        await provider.updateComplete;
+        const mocks = provider.hass?.mockEntities;
+        if (mocks) {
+          const TICK = 3;
+          setInterval(() => {
+            window.RB.step(TICK);
+            for (const e of window.RB.entities()) {
+              mocks[e.entity_id]?.update({ state: e.state, attributes: e.attributes });
+            }
+          }, TICK * 1000);
+        }
+      } catch (err) {
+        console.warn("Rapid Bus demo: live movement unavailable", err);
+      }
+    </script>
   </body>
 </html>
