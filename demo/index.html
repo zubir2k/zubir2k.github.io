@@ -81,6 +81,7 @@
         Live interactive previews of custom Lovelace cards from
         <a href="https://github.com/zubir2k" target="_blank" rel="noopener">github.com/zubir2k</a>,
         running in the browser with mocked Home Assistant entities.
+        Showing <span id="demo-count">9</span> out of <span id="repo-count">17</span> integrations.
       </p>
     </header>
 
@@ -166,5 +167,28 @@
         <span class="tag">custom:spfm-card →</span>
       </a>
     </div>
+
+    <script>
+      (function () {
+        document.getElementById("demo-count").textContent = document.querySelectorAll(".grid .card").length;
+        const repoEl = document.getElementById("repo-count");
+        const cached = sessionStorage.getItem("ha_repo_count");
+        if (cached) {
+          repoEl.textContent = cached;
+          return;
+        }
+        fetch("https://api.github.com/users/zubir2k/repos?per_page=100")
+          .then((r) => (r.ok ? r.json() : null))
+          .then((repos) => {
+            if (!Array.isArray(repos)) return;
+            const count = repos.filter((r) => r.name.startsWith("homeassistant-")).length;
+            if (count > 0) {
+              repoEl.textContent = count;
+              sessionStorage.setItem("ha_repo_count", String(count));
+            }
+          })
+          .catch(() => {});
+      })();
+    </script>
   </body>
 </html>
