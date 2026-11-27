@@ -66,7 +66,7 @@
     </header>
 
     <ha-embed-provider id="gas-provider">
-      <script type="application/json">
+      <script id="entities-json" type="application/json">
         [
           {
             "entity_id": "sensor.lpg_kitchen",
@@ -79,11 +79,24 @@
               "cylinder_kg": 14,
               "days_in_use": 35,
               "duration": 45,
-              "last_change": "2026-10-22T09:00:00+08:00",
-              "expected_empty": "2026-12-06T09:00:00+08:00"
+              "last_change": "__LAST_CHANGE__",
+              "expected_empty": "__EXPECTED_EMPTY__"
             }
           }
         ]
+      </script>
+      <script>
+        (function () {
+          const ymd = (d) => {
+            const p = (n) => String(n).padStart(2, "0");
+            return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+          };
+          const now = Date.now();
+          const el = document.getElementById("entities-json");
+          el.textContent = el.textContent
+            .replace(/__LAST_CHANGE__/g, ymd(new Date(now - 35 * 86400000)))
+            .replace(/__EXPECTED_EMPTY__/g, ymd(new Date(now + 10 * 86400000)));
+        })();
       </script>
 
       <ha-embed-card>
@@ -100,6 +113,10 @@
       await customElements.whenDefined("ha-embed-provider");
       const provider = document.getElementById("gas-provider");
       await provider.updateComplete;
+      const ymd = (d) => {
+        const p = (n) => String(n).padStart(2, "0");
+        return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+      };
       const origCallService = provider.hass.callService.bind(provider.hass);
       provider.hass.callService = async (domain, service, data, target) => {
         if (domain === "button" && service === "press" && data?.entity_id === "button.lpg_kitchen_renew") {
@@ -111,8 +128,8 @@
               percentage: 100,
               remaining_kg: 14.0,
               days_in_use: 0,
-              last_change: now.toISOString(),
-              expected_empty: expected.toISOString(),
+              last_change: ymd(now),
+              expected_empty: ymd(expected),
             },
           });
           return;
