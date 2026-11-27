@@ -18,8 +18,19 @@
       header {
         margin-bottom: 2rem;
       }
+      .title-row {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        margin-bottom: 0.35rem;
+      }
+      .title-row img {
+        width: 36px;
+        height: 36px;
+        flex: none;
+      }
       header h1 {
-        margin: 0 0 0.35rem;
+        margin: 0;
         font-size: 1.75rem;
       }
       header p {
@@ -76,7 +87,13 @@
   </head>
   <body>
     <header>
-      <h1>Home Assistant Card Demos</h1>
+      <div class="title-row">
+        <img
+          src="https://cdn.jsdelivr.net/gh/home-assistant/home-assistant.io@current/source/images/favicon-192x192.png"
+          alt="Home Assistant"
+        />
+        <h1>Home Assistant Card Demos</h1>
+      </div>
       <p>
         Live interactive previews of custom Lovelace cards from
         <a href="https://github.com/zubir2k" target="_blank" rel="noopener">github.com/zubir2k</a>,
